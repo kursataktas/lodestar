@@ -138,7 +138,6 @@ export async function getState(
   const stateBytes = state.serialize();
   serializeTimer?.();
 
-  regenTimer?.();
   return stateBytes;
 }
 
