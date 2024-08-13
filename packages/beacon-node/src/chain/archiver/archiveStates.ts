@@ -3,10 +3,8 @@ import {Logger} from "@lodestar/utils";
 import {IBeaconDb} from "../../db/index.js";
 import {IStateRegenerator} from "../regen/interface.js";
 import {IStateRegenerator, RegenCaller} from "../regen/interface.js";
-import {putHistoricalSate} from "../historicalState/historicalState.js";
-import {DiffLayers} from "../historicalState/diffLayers.js";
-import {putHistoricalSate} from "../historicalState/historicalState.js";
 import {IStateRegenerator, RegenCaller} from "../regen/interface.js";
+import {IHistoricalStateRegen} from "../historicalState/types.js";
 
 export interface StatesArchiverOpts {}
 
@@ -17,10 +15,10 @@ export interface StatesArchiverOpts {}
  */
 export class StatesArchiver {
   constructor(
+    private readonly historicalSates: IHistoricalStateRegen | undefined,
     private readonly regen: IStateRegenerator,
     private readonly db: IBeaconDb,
     private readonly logger: Logger,
-    private readonly diffLayers: DiffLayers,
     private readonly opts: StatesArchiverOpts
   ) {}
 
@@ -38,9 +36,6 @@ export class StatesArchiver {
       {dontTransferCache: true},
       RegenCaller.historicalState
     );
-    await putHistoricalSate(
-      {slot: state.slot, state: state.serialize()},
-      {db: this.db, logger: this.logger, diffLayers: this.diffLayers}
-    );
+    await this.historicalSates?.storeHistoricalState(state.slot, state.serialize());
   }
 }
