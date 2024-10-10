@@ -109,7 +109,7 @@ export class Archiver {
       this.prevFinalized = finalized;
 
       // should be after ArchiveBlocksTask to handle restart cleanly
-      await this.statesArchiver.maybeArchiveState(finalized, this.metrics);
+      await this.statesArchiver.maybeArchiveState(finalized);
 
       this.chain.regen.pruneOnFinalized(finalizedEpoch);
 

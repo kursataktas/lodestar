@@ -4,7 +4,6 @@ import {computeStartSlotAtEpoch} from "@lodestar/state-transition";
 import {CachedBeaconStateAllForks} from "@lodestar/state-transition";
 import {IBeaconDb} from "../../db/index.js";
 import {IStateRegenerator} from "../regen/interface.js";
-import {IStateRegenerator} from "../regen/interface.js";
 import {IHistoricalStateRegen} from "../historicalState/types.js";
 
 export interface StatesArchiverOpts {}

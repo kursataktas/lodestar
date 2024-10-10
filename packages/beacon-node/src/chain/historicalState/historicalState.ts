@@ -1,7 +1,8 @@
+import {PubkeyIndexMap} from "@chainsafe/pubkey-index-map";
 import {Slot} from "@lodestar/types";
 import {Logger} from "@lodestar/logger";
 import {BeaconConfig} from "@lodestar/config";
-import {computeEpochAtSlot, PubkeyIndexMap} from "@lodestar/state-transition";
+import {computeEpochAtSlot} from "@lodestar/state-transition";
 import {formatBytes} from "@lodestar/utils";
 import {IBeaconDb} from "../../db/interface.js";
 import {HistoricalStateRegenMetrics, IBinaryDiffCodec, StateArchiveStrategy} from "./types.js";

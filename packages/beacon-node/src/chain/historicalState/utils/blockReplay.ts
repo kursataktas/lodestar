@@ -5,7 +5,6 @@ import {
   CachedBeaconStateAllForks,
   DataAvailableStatus,
   ExecutionPayloadStatus,
-  PubkeyIndexMap,
   createCachedBeaconState,
   stateTransition,
 } from "@lodestar/state-transition";
@@ -95,8 +94,8 @@ export async function replayBlocks(
   metrics?.stateTransitionBlocks.observe(blockCount);
   transitionTimer?.();
 
-  if (state.slot !== slot) {
-    throw Error(`Failed to generate historical state for slot ${slot}`);
+  if (state.slot !== toSlot) {
+    throw Error(`Failed to generate historical state for slot ${toSlot}`);
   }
 
   const serializeTimer = metrics?.stateSerializationTime.startTimer();
