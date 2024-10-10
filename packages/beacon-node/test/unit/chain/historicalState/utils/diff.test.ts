@@ -6,7 +6,7 @@ import {getMockedBeaconDb} from "../../../../mocks/mockedBeaconDb.js";
 import {getMockedLogger} from "../../../../mocks/loggerMock.js";
 import {getDiffState} from "../../../../../src/chain/historicalState/utils/diff.js";
 import {IBinaryDiffCodec} from "../../../../../src/chain/historicalState/types.js";
-import {BinaryDiffVCDiffCodec} from "../../../../../src/chain/historicalState/utils/binaryDiffVCDiffCodec.js";
+import {BinaryDiffXDelta3Codec} from "../../../../../src/chain/historicalState/utils/binaryDiffXDelta3Codec.js";
 
 describe("historicalState/util", () => {
   let db: IBeaconDb;
@@ -18,7 +18,7 @@ describe("historicalState/util", () => {
     db = getMockedBeaconDb();
     logger = getMockedLogger();
     diffLayers = new DiffLayers();
-    codec = new BinaryDiffVCDiffCodec();
+    codec = new BinaryDiffXDelta3Codec();
 
     vi.spyOn(codec, "apply");
     vi.spyOn(codec, "compute");

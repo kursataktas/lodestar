@@ -4,7 +4,7 @@ import {describe, it, expect, beforeAll} from "vitest";
 import {BeaconState, Epoch, phase0, RootHex, Slot, ssz} from "@lodestar/types";
 import {fromHex} from "@lodestar/utils";
 import {ForkName} from "@lodestar/params";
-import {BinaryDiffVCDiffCodec} from "../../../../../src/chain/historicalState/utils/binaryDiffVCDiffCodec.js";
+import {BinaryDiffXDelta3Codec} from "../../../../../src/chain/historicalState/utils/binaryDiffXDelta3Codec.js";
 import {generateState} from "../../../../utils/state.js";
 import {IBinaryDiffCodec} from "../../../../../src/chain/historicalState/types.js";
 
@@ -16,8 +16,8 @@ const testsCases: {title: string; base: () => Uint8Array; changed: () => Uint8Ar
   },
   {
     title: "Array of numbers",
-    base: () => Uint8Array.from([10, 11, 12]),
-    changed: () => Uint8Array.from([10, 11, 12, 14, 15]),
+    base: () => Uint8Array.from([10, 11, 12, 13, 14, 15]),
+    changed: () => Uint8Array.from([10, 11, 12, 14, 15, 16, 17, 18]),
   },
   {
     title: "An attestation",
@@ -69,7 +69,7 @@ describe("BinaryDiffCodec", () => {
   let multiDiffData: Record<string, {value: Uint8Array; diff: Uint8Array}>;
 
   beforeAll(async () => {
-    codec = new BinaryDiffVCDiffCodec();
+    codec = new BinaryDiffXDelta3Codec();
     await codec.init();
 
     multiDiffData = {

@@ -8,10 +8,10 @@ import {IBeaconDb} from "../../db/interface.js";
 import {HistoricalStateRegenMetrics, IBinaryDiffCodec, StateArchiveStrategy} from "./types.js";
 import {replayBlocks} from "./utils/blockReplay.js";
 import {DiffLayers} from "./diffLayers.js";
-import {BinaryDiffVCDiffCodec} from "./utils/binaryDiffVCDiffCodec.js";
+import {BinaryDiffXDelta3Codec} from "./utils/binaryDiffXDelta3Codec.js";
 import {getDiffState} from "./utils/diff.js";
 
-export const codec: IBinaryDiffCodec = new BinaryDiffVCDiffCodec();
+export const codec: IBinaryDiffCodec = new BinaryDiffXDelta3Codec();
 
 export async function getHistoricalState(
   {slot}: {slot: Slot},
